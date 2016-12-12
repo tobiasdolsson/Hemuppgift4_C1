@@ -18,10 +18,7 @@ public class TimingAttack {
 	public TimingAttack(String name, String grade){
 		this.name = name;
 		this.grade=grade;
-		//signature="6823ea50b133c58cba36"
-		//signature="6823000000000000ba36";
-		//signature="";
-		//targetURL = targetURL + name + "&grade=" + grade + "&signature=" + signature;
+		
 	}
 	
 	public String getURL(){
@@ -66,43 +63,28 @@ public class TimingAttack {
 		long startTime = System.nanoTime();
 		totalTime=0;
 		try {
+			   
+			StringBuilder response = new StringBuilder(); 
 			
-		    //Create connection
-			StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
-			for(int i = 0; i<5; i++){
+			for(int i = 0; i<5; i++){	
 				
-			
 			URL url = new URL(startURL);
-			
-		    connection = (HttpURLConnection) url.openConnection();
-		    
-
+		    connection = (HttpURLConnection) url.openConnection(); 
 		    connection.setUseCaches(false);
-		    connection.setDoOutput(true);
-
-		    //Send request
-		    
-		    DataOutputStream wr = new DataOutputStream (
-		        connection.getOutputStream());
-		  //  wr.writeBytes(urlParameters);
-		    wr.close();
-
-		    //Get Response  
 		    InputStream is = connection.getInputStream();
-		    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-		    
+		    BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
 		    String line;
-		    while ((line = rd.readLine()) != null) {
+		    
+		    while ((line = br.readLine()) != null) {
 		      response.append(line);
 		      response.append('\r');
 		    }
-		    rd.close();
 		    
-		    //System.out.println("Time: "+ (totalTime));
+		    br.close();
+
 		}
 			long endTime = System.nanoTime();
 		    totalTime = (endTime-startTime);
-			//System.out.println(startURL);
 		    System.out.println("Mean time " +signature+" :"+ (totalTime/5));
 		    return totalTime/5;
 			
