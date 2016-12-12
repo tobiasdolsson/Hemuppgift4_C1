@@ -1,7 +1,6 @@
 package main;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
@@ -10,15 +9,13 @@ import java.net.URL;
 
 public class TimingAttack {
 	HttpURLConnection connection = null;
-	private String name, grade;
 	private String signature;
 	private long totalTime = 0;
-	private String targetURL = "https://eitn41.eit.lth.se:3119/ha4/addgrade.php?name=Kalle&grade=5&signature=";
-	private String startURL = "https://eitn41.eit.lth.se:3119/ha4/addgrade.php?name=Kalle&grade=5&signature=";
+	private String targetURL = "https://eitn41.eit.lth.se:3119/ha4/addgrade.php?name=";
+	private String startURL = "https://eitn41.eit.lth.se:3119/ha4/addgrade.php?name=";
 	public TimingAttack(String name, String grade){
-		this.name = name;
-		this.grade=grade;
-		
+		targetURL = targetURL + name + "&grade=" + grade + "&signature=";
+		startURL = startURL + name + "&grade=" + grade + "&signature=";
 	}
 	
 	public String getURL(){
